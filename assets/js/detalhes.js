@@ -1,35 +1,48 @@
-async function fetchCountryDetails() {
-   const params = new URLSearchParams(window.location.search);
-   const countryCode = params.get("code");
-   
-   if (!countryCode) {
-       document.getElementById("country-details").innerHTML = "País não encontrado.";
-       return;
-   }
-   
-   try {
-       let response = await fetch(`https://restcountries.com/v3.1/alpha/${countryCode}`);
-       let data = await response.json();
-       let country = data[0];
-       
-       document.getElementById("country-details").innerHTML = `
-           <h2>${country.name.official}</h2>
-           <img 
-            src="${country.flags.png}" 
-            alt="Bandeira de ${country.name.official}" 
-            width="200"
-            />
-           <p><strong>Capital:</strong> ${country.capital ? country.capital[0] : "N/A"}</p>
-           <p><strong>Língua:</strong> ${Object.values(country.languages || {}).join(", ")}</p>
-           <p><strong>Moeda:</strong> ${Object.values(country.currencies || {}).map(c => c.name).join(", ")}</p>
-           <p><strong>Continente:</strong> ${country.continents.join(", ")}</p>
-           <p><strong>População:</strong> ${country.population.toLocaleString()}</p>
-           <p><strong>Área geográfica:</strong> ${country.area.toLocaleString()} km²</p>
-           <p><a href="${country.maps.googleMaps}" target="_blank">Ver no Google Maps</a></p>
-       `;
-   } catch (error) {
-       document.getElementById("country-details").innerHTML = "Erro ao carregar os detalhes do país.";
-   }
+// Criar modal no HTML se ainda não existir
+document.addEventListener("DOMContentLoaded", () => {
+    if (!document.getElementById("countryModal")) {
+        document.body.insertAdjacentHTML("beforeend", `
+            <div id="countryModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div id="countryDetails"></div>
+                </div>
+            </div>
+        `);
+    }
+});
+
+// Função para abrir o modal com detalhes do país
+async function openModal(code) {
+    try {
+        let reply = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
+        let data = await reply.json();
+
+        if (!data || data.length === 0) {
+            throw new Error("País não encontrado");
+        }
+
+        const country = data[0];
+        document.getElementById("countryDetails").innerHTML = `
+            <h2>${country.name.official}</h2>
+            <img src="${country.flags.png}" alt="Bandeira de ${country.name.common}" width="200" />
+            <p><strong>Capital:</strong> ${country.capital}</p>
+            <p><strong>Língua(s):</strong> ${Object.values(country.languages).join(', ')}</p>
+            <p><strong>Moeda:</strong> ${Object.values(country.currencies)[0].name}</p>
+            <p><strong>Continente:</strong> ${country.region}</p>
+            <p><strong>População:</strong> ${country.population}</p>
+            <p><strong>Área geográfica:</strong> ${country.area} km²</p>
+            <p><a href="https://www.google.com/maps?q=${country.latlng[0]},${country.latlng[1]}" target="_blank">Ver no Google Maps</a></p>
+        `;
+
+        document.getElementById("countryModal").style.display = "flex";
+    } catch (error) {
+        document.getElementById("countryDetails").innerHTML = `<p>Erro ao carregar detalhes do país.</p>`;
+        console.error("Erro ao buscar detalhes do país:", error);
+    }
 }
 
-fetchCountryDetails();
+// Função para fechar o modal
+function closeModal() {
+    document.getElementById("countryModal").style.display = "none";
+}

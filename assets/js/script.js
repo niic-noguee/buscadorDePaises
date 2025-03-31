@@ -1,53 +1,32 @@
-let allCountries = [];
+mapboxgl.accessToken = 'pk.eyJ1IjoiaGFycnkxMjM0OTgiLCJhIjoiY2s4OXh1c3BqMGFsZzNvbXA3YmYyaGFhYSJ9.wmVMiMxlSqpzJPsj-UXr3Q';
+
+var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/dark-v10',
+    zoom: 1,
+    center: [0, 20]
+});
 
 async function searchCountries(value) {
     let reply = await fetch("https://restcountries.com/v3.1/" + value);
     let data = await reply.json();
-    allCountries = data;
-    renderCountries(allCountries);
+    renderMapMarkers(data);
 }
 
-function renderCountries(allCountries) {
-    document.querySelector(".allCountries").innerHTML = "";
-    document.querySelector("#qt").innerHTML = allCountries.length;
+function renderMapMarkers(countries) {
+    for (let country of countries) {
+        let coords = country.latlng;
+        if (coords) {
+            let marker = new mapboxgl.Marker()
+                .setLngLat([coords[1], coords[0]])
+                .addTo(map);
 
-    for (let country of allCountries) {
-        let card = document.createElement("div");
-        card.classList.add("country");
-
-        card.innerHTML = `
-            <img 
-              width="200"
-              src="${country.flags.png}" 
-              alt="${country.flags.alt}" 
-            />
-            <span>${country.name.common}</span>
-        `;
-        
-        card.onclick = () => {
-            window.location.href = `pages/detalhes.html?code=${country.cca2.toLowerCase()}`;
-        };
-        
-        document.querySelector(".allCountries").appendChild(card);
-    }
-}
-
-function filterCountries(input) {
-    searchCountries(input.value);
-}
-
-function localSearch(input) {
-    const searchedCountries = [];
-    const name = input.value.toLowerCase();
-
-    for (let country of allCountries) {
-        let c = country.translations?.por?.common?.toLowerCase() || country.name.common.toLowerCase();
-        if (c.startsWith(name)) {
-            searchedCountries.push(country);
+            marker.getElement().addEventListener('click', function (event) {
+                event.stopPropagation(); // Evita conflitos de clique
+                openModal(country.cca2.toLowerCase()); // Abre o modal ao invés de redirecionar
+            });
         }
     }
-
-    renderCountries(searchedCountries);
 }
 
 searchCountries("all");

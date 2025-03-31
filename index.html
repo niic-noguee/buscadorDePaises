@@ -1,80 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de Países</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
-  </head>
-  <body>
-    <h1>Buscador de Países</h1>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/detalhes.css">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet"/>
+</head>
+<body>
+    <!-- <h1>Buscador de Países</h1> -->
+    <div id="map"></div>
 
-    <div class="subHeader">
-      <div class="searchForm">
-        Pesquisar país:
-        <input type="text" onkeyup="localSearch(this)" />
-      </div>
-      <div class="searchFilters">
-        Filtros:
-        <input
-          onchange="filterCountries(this)"
-          checked
-          value="all"
-          type="radio"
-          name="region"
-        />
-        Todos
-        <input
-          onchange="filterCountries(this)"
-          value="region/america"
-          type="radio"
-          name="region"
-        />
-        America
-        <input
-          onchange="filterCountries(this)"
-          value="region/europe"
-          type="radio"
-          name="region"
-        />
-        Europa
-        <input
-          onchange="filterCountries(this)"
-          value="region/oceania"
-          type="radio"
-          name="region"
-        />
-        Oceania
-        <input
-          onchange="filterCountries(this)"
-          value="region/africa"
-          type="radio"
-          name="region"
-        />
-        África
-        <input
-          onchange="filterCountries(this)"
-          value="region/asia"
-          type="radio"
-          name="region"
-        />
-        Ásia
-      </div>
-    </div>
-    <hr />
-    <h2>Total de países: <span id="qt">250</span></h2>
+    <!-- <div class="subHeader">
+        <div class="searchForm">
+            Pesquisar país:
+            <input type="text" onkeyup="localSearch(this)" />
+        </div>
+    </div> -->
 
-    <div class="allCountries">
-      <div class="country">
-        <img
-          width="200"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPh_3jR2g6WByphj_39OElNved1Y7AaPNOPA&s"
-          alt=""
-        />
-        <span>Brasil</span>
-      </div>
-    </div>
-
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
     <script src="assets/js/script.js"></script>
-  </body>
+    <script src="assets/js/detalhes.js"></script>
+</body>
 </html>
