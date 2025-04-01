@@ -38,17 +38,3 @@ Um aplicativo web interativo para explorar informações detalhadas sobre todos 
 ## 🌐 Acesso Online
 
 O projeto está disponível em: https://niic-noguee.github.io/buscadorDePaises/
-
-## 🎨 Estrutura do Projeto
-
-buscador-paises/
-├── assets/
-│   ├── css/
-│   │   ├── style.css          # Estilos principais
-│   │   ├── modal.css          # Estilos do modal
-│   │   └── welcome.css        # Estilos da tela inicial
-│   └── js/
-│       ├── script.js          # Lógica do mapa
-│       └── modal.js           # Lógica do modal e tela inicial
-├── index.html                 # Página principal
-└── README.md                  
