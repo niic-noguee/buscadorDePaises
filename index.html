@@ -6,18 +6,42 @@
     <title>Buscador de Países</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/detalhes.css">
+    <link rel="stylesheet" href="assets/css/bemVindo.css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body>
-    <!-- <h1>Buscador de Países</h1> -->
-    <div id="map"></div>
-
-    <!-- <div class="subHeader">
-        <div class="searchForm">
-            Pesquisar país:
-            <input type="text" onkeyup="localSearch(this)" />
+    <!-- Tela de boas vindas -->
+    <div id="welcome-screen" class="welcome-container">
+        <div class="welcome-content">
+            <h1 class="animate__animated animate__fadeInDown">BUSCADOR DE PAÍSES</h1>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">
+                Descubra o mundo em seus detalhes: <span class="highlight">193 países</span>, 
+                <span class="highlight">culturas fascinantes</span> e 
+                <span class="highlight">dados essenciais</span> ao seu alcance.
+            </p>
+            <!-- <div class="stats-container animate__animated animate__fadeIn animate__delay-1-5s">
+                <div class="stat-item">
+                    <div class="stat-number">193</div>
+                    <div class="stat-label">Países</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Continentes</div>
+                </div>
+            </div> -->
+            <button id="start-button" class="explore-button animate__animated animate__fadeInUp animate__delay-2s">
+                <span>Explorar Mundo</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </div>
-    </div> -->
+        <div class="earth-animation"></div>
+    </div>
+
+    <!-- Mapa -->
+    <div id="map" style="display: none;"></div>
 
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js"></script>
     <script src="assets/js/script.js"></script>
