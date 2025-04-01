@@ -33,7 +33,7 @@ Um aplicativo web interativo para explorar informações detalhadas sobre todos 
 2. Acesse a pasta do projeto:
    ```bash
    cd buscador-paises
-3. Abra o arquivo index.html no seu navegador 
+3. Abra o arquivo `index.html` no seu navegador 
 
 ## 🌐 Acesso Online
 
