@@ -30,3 +30,7 @@ Um aplicativo web interativo para explorar informações detalhadas sobre todos 
 1. Clone o repositório:
    ```bash
    git clone https://github.com/seu-usuario/buscador-paises.git
+2. Acesse a pasta do projeto:
+   ```bash
+   cd buscador-paises
+3. Abra o arquivo 'index.html' no seu navegador 
